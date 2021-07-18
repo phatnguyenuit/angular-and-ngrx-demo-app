@@ -1,0 +1,10 @@
+<form [formGroup]="addAttendeeForm" (ngSubmit)="submit()">
+  <input type="text" formControlName="name" />
+  <button
+    [disabled]="addAttendeeForm.invalid"
+    type="submit"
+    data-testid="submit"
+  >
+    submit
+  </button>
+</form>

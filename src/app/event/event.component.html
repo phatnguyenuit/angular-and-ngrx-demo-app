@@ -1,0 +1,3 @@
+<app-add-attendee (onAddAttendee)="addAttendee($event)"></app-add-attendee>
+<div *ngIf="isLoading$ | async">Loading..</div>
+<app-event-list [attendees]="attendees$ | async"></app-event-list>
