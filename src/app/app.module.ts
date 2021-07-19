@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
 
 import { extModules } from '../build-specifics/index';
@@ -13,6 +14,7 @@ import { reducersMap } from './state/root.reducer';
     BrowserModule,
     AppRoutingModule,
     StoreModule.forRoot(reducersMap),
+    EffectsModule.forRoot([]),
     extModules,
   ],
   providers: [],

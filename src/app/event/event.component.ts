@@ -1,12 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { Observable, of } from 'rxjs';
+import { Observable } from 'rxjs';
+import { switchMap } from 'rxjs/operators';
 
 import { RootState } from '../state/root.reducer';
 import { Attendee } from './models';
 import { EventService } from './services/event.service';
 import { startSpinner, stopSpinner } from './state/spinner/actions';
 import { selectIsSpinning } from './state/spinner/selectors';
+import { loadAttendees } from './state/attendees/actions';
+import { selectAttendees } from './state/attendees/selectors';
 
 @Component({
   selector: 'app-event',
@@ -14,15 +17,15 @@ import { selectIsSpinning } from './state/spinner/selectors';
   styleUrls: ['./event.component.scss'],
 })
 export class EventComponent implements OnInit {
-  attendees$: Observable<Attendee[]>;
+  attendees$!: Observable<Attendee[]>;
   isLoading$: Observable<boolean>;
 
   constructor(
     private eventService: EventService,
     private store: Store<RootState>
   ) {
-    this.attendees$ = of([]);
     this.isLoading$ = this.store.select(selectIsSpinning);
+    this.attendees$ = this.store.select(selectAttendees);
   }
 
   ngOnInit() {
@@ -30,11 +33,12 @@ export class EventComponent implements OnInit {
   }
 
   getAttendees() {
-    this.attendees$ = this.eventService.getAttendees();
+    this.store.dispatch(loadAttendees());
   }
 
   addAttendee(attendee: Attendee) {
     this.store.dispatch(startSpinner());
+    // TODO Refactor to use effect
     this.eventService.addAttendee(attendee).subscribe(() => {
       this.store.dispatch(stopSpinner());
       this.getAttendees();

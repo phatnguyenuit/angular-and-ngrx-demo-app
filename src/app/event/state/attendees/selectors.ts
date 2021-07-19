@@ -7,3 +7,8 @@ export const selectAttendeesState = createSelector(
   selectEventState,
   (eventState) => eventState.attendees
 );
+
+export const selectAttendees = createSelector(
+  selectAttendeesState,
+  (attendeesState) => attendeesState.attendees
+);
