@@ -10,9 +10,10 @@ describe('spinner.reducer', () => {
     it(`should return spinner state correctly (test case: ${
       index + 1
     })`, () => {
-      expect(selectIsSpinning.projector(testCase.initialState)).toEqual(
-        testCase.expected
-      );
+      const result = selectIsSpinning.projector({
+        spinner: testCase.initialState,
+      });
+      expect(result).toEqual(testCase.expected);
     });
   });
 });

@@ -18,7 +18,9 @@ describe('EventComponent', () => {
       declarations: [EventComponent, AddAttendeeComponent, EventListComponent],
       imports: [ReactiveFormsModule],
       providers: [
-        provideMockStore({}),
+        provideMockStore({
+          initialState: {},
+        }),
         {
           provide: HttpClient,
           useValue: null,

@@ -5,8 +5,8 @@ import { Observable, of } from 'rxjs';
 import { RootState } from '../state/root.reducer';
 import { Attendee } from './models';
 import { EventService } from './services/event.service';
-import { startSpinner, stopSpinner } from './state/actions';
-import { selectIsSpinning } from './state/selectors';
+import { startSpinner, stopSpinner } from './state/spinner/actions';
+import { selectIsSpinning } from './state/spinner/selectors';
 
 @Component({
   selector: 'app-event',

@@ -5,14 +5,14 @@ import { StoreModule } from '@ngrx/store';
 import { extModules } from '../build-specifics/index';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { reducers } from './state/root.reducer';
+import { reducersMap } from './state/root.reducer';
 
 @NgModule({
   declarations: [AppComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    StoreModule.forRoot(reducers),
+    StoreModule.forRoot(reducersMap),
     extModules,
   ],
   providers: [],

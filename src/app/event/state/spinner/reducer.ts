@@ -1,6 +1,7 @@
 import { createReducer, on } from '@ngrx/store';
 import * as actions from './actions';
-import { SpinnerState } from './types';
+
+export type SpinnerState = boolean;
 
 const initialState: SpinnerState = false;
 

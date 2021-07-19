@@ -1,7 +1,9 @@
 import { createSelector } from '@ngrx/store';
 import { RootState } from 'app/state/root.reducer';
 
+const selectEventState = (state: RootState) => state.event;
+
 export const selectIsSpinning = createSelector(
-  (state: RootState) => state.spinner,
-  (isSpinning) => isSpinning
+  selectEventState,
+  (eventState) => eventState.spinner
 );
