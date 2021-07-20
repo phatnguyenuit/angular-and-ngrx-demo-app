@@ -1,25 +1,30 @@
 import { createReducer, on } from '@ngrx/store';
+import { EntityAdapter, createEntityAdapter } from '@ngrx/entity';
+
+import { Attendee } from '../../models';
 import { AttendeesState } from '../types';
 import * as actions from './actions';
 
-const initialState: AttendeesState = {
+export const adapter: EntityAdapter<Attendee> = createEntityAdapter<Attendee>();
+
+export const initialState: AttendeesState = adapter.getInitialState({
   loading: false,
-  attendees: [],
-};
+  errorMessage: undefined,
+});
 
 export const reducer = createReducer(
   initialState,
-  on(actions.loadAttendees, (state) => ({ ...state, loading: true })),
-  on(actions.loadAttendeesSuccess, (state, { attendees }) => ({
-    ...state,
-    attendees,
-    loading: false,
-    message: undefined,
-  })),
-  on(actions.loadAttendeesFail, (state, { message }) => ({
-    ...state,
-    message,
-    loading: false,
-    attendees: [],
-  }))
+  on(actions.loadAttendees, (state) =>
+    adapter.removeAll({ ...state, loading: true, message: undefined })
+  ),
+  on(actions.loadAttendeesSuccess, (state, { attendees }) =>
+    adapter.addMany(attendees, {
+      ...state,
+      loading: false,
+      message: undefined,
+    })
+  ),
+  on(actions.loadAttendeesFail, (state, { errorMessage }) =>
+    adapter.removeAll({ ...state, errorMessage, loading: false })
+  )
 );

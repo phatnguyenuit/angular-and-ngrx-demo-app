@@ -1,6 +1,7 @@
 import { selectAttendeesState, selectAttendees } from './selectors';
+import { Attendee } from '../../models';
 import { AttendeesState } from '../types';
-import { Attendee } from 'app/event/models';
+import { initialState } from './reducer';
 
 describe('attendees.selectors', () => {
   describe('selectAttendeesState', () => {
@@ -9,59 +10,57 @@ describe('attendees.selectors', () => {
       expected: AttendeesState;
     }[] = [
       {
-        initialState: {
-          loading: false,
-          attendees: [],
-        },
-        expected: {
-          loading: false,
-          attendees: [],
-        },
+        initialState,
+        expected: initialState,
       },
       {
         initialState: {
+          ...initialState,
           loading: true,
-          attendees: [],
         },
         expected: {
+          ...initialState,
           loading: true,
-          attendees: [],
         },
       },
       {
         initialState: {
           loading: false,
-          attendees: [],
-          message: 'Failed to load',
+          ids: [],
+          entities: {},
+          errorMessage: 'Failed to load',
         },
         expected: {
           loading: false,
-          attendees: [],
-          message: 'Failed to load',
+          ids: [],
+          entities: {},
+          errorMessage: 'Failed to load',
         },
       },
       {
         initialState: {
           loading: false,
-          attendees: [
-            {
+          ids: [1],
+          entities: {
+            1: {
               id: 1,
               name: 'Test Attendee',
               attending: true,
               guests: 0,
             },
-          ],
+          },
         },
         expected: {
           loading: false,
-          attendees: [
-            {
+          ids: [1],
+          entities: {
+            1: {
               id: 1,
               name: 'Test Attendee',
               attending: true,
               guests: 0,
             },
-          ],
+          },
         },
       },
     ];
@@ -83,28 +82,26 @@ describe('attendees.selectors', () => {
     const testCases: { initialState: AttendeesState; expected: Attendee[] }[] =
       [
         {
-          initialState: {
-            loading: false,
-            attendees: [],
-          },
+          initialState,
           expected: [],
         },
         {
           initialState: {
             loading: false,
-            attendees: [
-              {
+            ids: [1],
+            entities: {
+              1: {
                 id: 1,
-                name: 'test name',
+                name: 'Test Attendee',
                 attending: true,
                 guests: 0,
               },
-            ],
+            },
           },
           expected: [
             {
               id: 1,
-              name: 'test name',
+              name: 'Test Attendee',
               attending: true,
               guests: 0,
             },

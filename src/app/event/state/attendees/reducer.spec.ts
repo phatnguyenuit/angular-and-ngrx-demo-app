@@ -18,14 +18,14 @@ describe('attendees.reducer', () => {
     const nextState = reducer(undefined, action);
 
     expect(nextState.loading).toEqual(false);
-    expect(nextState.attendees).toEqual([]);
+    expect(nextState.ids).toEqual([]);
   });
 
   it('should return error message when loading attendees failed', () => {
-    const action = loadAttendeesFail({ message: 'Failed to load' });
+    const action = loadAttendeesFail({ errorMessage: 'Failed to load' });
     const nextState = reducer(undefined, action);
 
     expect(nextState.loading).toEqual(false);
-    expect(nextState.message).toEqual('Failed to load');
+    expect(nextState.errorMessage).toEqual('Failed to load');
   });
 });

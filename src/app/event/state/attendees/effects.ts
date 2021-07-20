@@ -23,7 +23,7 @@ export class AttendeesEffects {
         this.eventService.getAttendees().pipe(
           map((attendees: Attendee[]) => loadAttendeesSuccess({ attendees })),
           catchError((error) =>
-            of(loadAttendeesFail({ message: error.message }))
+            of(loadAttendeesFail({ errorMessage: error.message }))
           )
         )
       )

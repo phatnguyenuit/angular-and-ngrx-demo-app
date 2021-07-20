@@ -4,6 +4,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { provideMockStore } from '@ngrx/store/testing';
 
 import { EventService } from './services/event.service';
+import { initialState } from './state/attendees/reducer';
 import { EventComponent } from './event.component';
 import { AddAttendeeComponent } from './components/add-attendee/add-attendee.component';
 import { EventListComponent } from './components/event-list/event-list.component';
@@ -21,7 +22,7 @@ describe('EventComponent', () => {
           initialState: {
             event: {
               spinner: {},
-              attendees: {},
+              attendees: initialState,
             },
           },
         }),

@@ -1,14 +1,14 @@
-import { createSelector } from '@ngrx/store';
-import { RootState } from 'app/state/root.reducer';
+import { createFeatureSelector, createSelector } from '@ngrx/store';
+import { EventState } from '../index';
+import { adapter } from './reducer';
 
-const selectEventState = (state: RootState) => state.event;
+export const selectEventState = createFeatureSelector<EventState>('event');
+
+const { selectAll } = adapter.getSelectors();
 
 export const selectAttendeesState = createSelector(
   selectEventState,
-  (eventState) => eventState.attendees
+  (state) => state.attendees
 );
 
-export const selectAttendees = createSelector(
-  selectAttendeesState,
-  (attendeesState) => attendeesState.attendees
-);
+export const selectAttendees = createSelector(selectAttendeesState, selectAll);

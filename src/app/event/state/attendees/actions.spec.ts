@@ -20,9 +20,11 @@ describe('attendees.actions', () => {
   });
 
   it('should return action to load attendees failed', () => {
-    expect(actions.loadAttendeesFail({ message: 'error message' })).toEqual({
+    expect(
+      actions.loadAttendeesFail({ errorMessage: 'error message' })
+    ).toEqual({
       type: AttendeeActions.loadAttendeesFail,
-      message: 'error message',
+      errorMessage: 'error message',
     });
   });
 });

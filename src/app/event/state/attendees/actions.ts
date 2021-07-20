@@ -14,5 +14,5 @@ export const loadAttendeesSuccess = createAction(
 );
 export const loadAttendeesFail = createAction(
   AttendeeActions.loadAttendeesFail,
-  props<{ message: string }>()
+  props<{ errorMessage: string }>()
 );
