@@ -5,6 +5,9 @@ export enum AttendeeActions {
   loadAttendees = '[ATTENDEES] LOAD',
   loadAttendeesSuccess = '[ATTENDEES] LOAD SUCCESS',
   loadAttendeesFail = '[ATTENDEES] LOAD FAILED',
+  addAttendee = '[ATTENDEES] ADD',
+  addAttendeeSuccess = '[ATTENDEES] ADD SUCCESS',
+  addAttendeeFail = '[ATTENDEES] ADD FAILED',
 }
 
 export const loadAttendees = createAction(AttendeeActions.loadAttendees);
@@ -14,5 +17,18 @@ export const loadAttendeesSuccess = createAction(
 );
 export const loadAttendeesFail = createAction(
   AttendeeActions.loadAttendeesFail,
+  props<{ errorMessage: string }>()
+);
+
+export const addAttendee = createAction(
+  AttendeeActions.addAttendee,
+  props<{ payload: Attendee }>()
+);
+export const addAttendeeSuccess = createAction(
+  AttendeeActions.addAttendeeSuccess,
+  props<{ attendee: Attendee }>()
+);
+export const addAttendeeFail = createAction(
+  AttendeeActions.addAttendeeFail,
   props<{ errorMessage: string }>()
 );

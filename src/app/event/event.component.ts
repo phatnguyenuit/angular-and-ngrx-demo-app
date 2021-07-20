@@ -5,9 +5,8 @@ import { Observable } from 'rxjs';
 import { RootState } from '../state/root.reducer';
 import { Attendee } from './models';
 import { EventService } from './services/event.service';
-import { startSpinner, stopSpinner } from './state/spinner/actions';
 import { selectIsSpinning } from './state/spinner/selectors';
-import { loadAttendees } from './state/attendees/actions';
+import { loadAttendees, addAttendee } from './state/attendees/actions';
 import { selectAttendees } from './state/attendees/selectors';
 
 @Component({
@@ -36,11 +35,6 @@ export class EventComponent implements OnInit {
   }
 
   addAttendee(attendee: Attendee) {
-    this.store.dispatch(startSpinner());
-    // TODO Refactor to use effect
-    this.eventService.addAttendee(attendee).subscribe(() => {
-      this.store.dispatch(stopSpinner());
-      this.getAttendees();
-    });
+    this.store.dispatch(addAttendee({ payload: attendee }));
   }
 }

@@ -26,5 +26,12 @@ export const reducer = createReducer(
   ),
   on(actions.loadAttendeesFail, (state, { errorMessage }) =>
     adapter.removeAll({ ...state, errorMessage, loading: false })
-  )
+  ),
+  on(actions.addAttendeeSuccess, (state, { attendee }) =>
+    adapter.addOne(attendee, state)
+  ),
+  on(actions.addAttendeeFail, (state, { errorMessage }) => ({
+    ...state,
+    errorMessage,
+  }))
 );

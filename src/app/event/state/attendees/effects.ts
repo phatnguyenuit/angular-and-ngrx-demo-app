@@ -10,6 +10,9 @@ import {
   AttendeeActions,
   loadAttendeesFail,
   loadAttendeesSuccess,
+  addAttendee,
+  addAttendeeSuccess,
+  addAttendeeFail,
 } from './actions';
 
 @Injectable()
@@ -24,6 +27,20 @@ export class AttendeesEffects {
           map((attendees: Attendee[]) => loadAttendeesSuccess({ attendees })),
           catchError((error) =>
             of(loadAttendeesFail({ errorMessage: error.message }))
+          )
+        )
+      )
+    )
+  );
+
+  addAttendee$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(AttendeeActions.addAttendee),
+      switchMap((action: ReturnType<typeof addAttendee>) =>
+        this.eventService.addAttendee(action.payload).pipe(
+          map((attendee: Attendee) => addAttendeeSuccess({ attendee })),
+          catchError((error) =>
+            of(addAttendeeFail({ errorMessage: error.message }))
           )
         )
       )
