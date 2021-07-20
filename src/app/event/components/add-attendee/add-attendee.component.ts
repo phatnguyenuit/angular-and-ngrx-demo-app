@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Attendee } from '../../models';
 
@@ -7,18 +7,16 @@ import { Attendee } from '../../models';
   templateUrl: './add-attendee.component.html',
   styleUrls: ['./add-attendee.component.scss'],
 })
-export class AddAttendeeComponent implements OnInit {
+export class AddAttendeeComponent {
   addAttendeeForm: FormGroup;
 
-  @Output() onAddAttendee = new EventEmitter<Attendee>();
+  @Output() addAttendeeEvent = new EventEmitter<Attendee>();
 
   constructor() {
     this.addAttendeeForm = new FormGroup({
       name: new FormControl('', [Validators.required]),
     });
   }
-
-  ngOnInit() {}
 
   submit() {
     if (this.addAttendeeForm.invalid) return;
@@ -29,7 +27,7 @@ export class AddAttendeeComponent implements OnInit {
       guests: 0,
     };
     // Emit new attendee
-    this.onAddAttendee.emit(attendee);
+    this.addAttendeeEvent.emit(attendee);
 
     // Reset form
     this.addAttendeeForm.reset('');

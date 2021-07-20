@@ -1,5 +1,5 @@
 import * as actions from './actions';
-import { AttendeeActions, loadAttendees } from './actions';
+import { AttendeeActions } from './actions';
 
 describe('attendees.actions', () => {
   it('should return action to load attendees', () => {

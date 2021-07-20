@@ -15,7 +15,6 @@ import {
   loadAttendeesSuccess,
 } from './actions';
 import { AttendeesEffects } from './effects';
-import { loadAttendeesFail } from './actions';
 
 describe('attendees.effects', () => {
   let httpMock: HttpTestingController;
@@ -61,6 +60,7 @@ describe('attendees.effects', () => {
     });
 
     const req = httpMock.expectOne('/api/attendees');
+
     expect(req.request.method).toBe('GET');
 
     req.flush(attendees);
@@ -73,6 +73,7 @@ describe('attendees.effects', () => {
     });
 
     const req = httpMock.expectOne('/api/attendees');
+
     expect(req.request.method).toBe('GET');
 
     req.error(new ErrorEvent('error event'), {

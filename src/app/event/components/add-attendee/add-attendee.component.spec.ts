@@ -31,22 +31,24 @@ describe('AddAttendeeComponent', () => {
 
   it('should have a valid form', () => {
     component.addAttendeeForm.controls.name.setValue('Fast');
+
     expect(component.addAttendeeForm.valid).toEqual(true);
   });
 
   it('should not submit in case having invalid form', () => {
-    const onAddAttendeeSpy = spyOn(component, 'onAddAttendee');
+    const addAttendeeEventSpy = spyOn(component, 'addAttendeeEvent');
     const button: HTMLButtonElement = fixture.nativeElement.querySelector(
       `button[data-testid='submit']`
     );
 
     button.click();
-    expect(onAddAttendeeSpy).not.toHaveBeenCalled();
+
+    expect(addAttendeeEventSpy).not.toHaveBeenCalled();
   });
 
   it('should emit an attendee', () => {
     component.addAttendeeForm.controls.name.setValue('Fast');
-    component.onAddAttendee.subscribe((attendee: Attendee) => {
+    component.addAttendeeEvent.subscribe((attendee: Attendee) => {
       expect(attendee.name).toEqual('Fast');
     });
     component.submit();

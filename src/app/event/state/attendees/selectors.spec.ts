@@ -73,6 +73,7 @@ describe('attendees.selectors', () => {
         const result = selectAttendeesState.projector({
           attendees: testCase.initialState,
         });
+
         expect(result).toEqual(testCase.expected);
       });
     });
@@ -114,6 +115,7 @@ describe('attendees.selectors', () => {
     testCases.forEach((testCase, index) => {
       it(`should return attendees correctly (test case: ${index + 1})`, () => {
         const result = selectAttendees.projector(testCase.initialState);
+
         expect(result).toEqual(testCase.expected);
       });
     });

@@ -13,6 +13,7 @@ describe('spinner.reducer', () => {
       const result = selectIsSpinning.projector({
         spinner: testCase.initialState,
       });
+
       expect(result).toEqual(testCase.expected);
     });
   });

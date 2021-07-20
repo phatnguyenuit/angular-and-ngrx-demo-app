@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { Attendee } from '../../models';
 
 @Component({
@@ -6,10 +6,8 @@ import { Attendee } from '../../models';
   templateUrl: './event-list.component.html',
   styleUrls: ['./event-list.component.scss'],
 })
-export class EventListComponent implements OnInit {
+export class EventListComponent {
   @Input() attendees!: Attendee[] | null;
 
   constructor() {}
-
-  ngOnInit(): void {}
 }

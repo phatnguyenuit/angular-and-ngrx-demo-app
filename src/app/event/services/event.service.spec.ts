@@ -43,6 +43,7 @@ describe('EventService', () => {
     });
 
     const req = httpMock.expectOne('/api/attendees');
+
     expect(req.request.method).toBe('GET');
 
     req.flush(attendees);
@@ -62,6 +63,7 @@ describe('EventService', () => {
 
     // get test request
     const req = httpMock.expectOne('/api/attendees');
+
     expect(req.request.method).toBe('POST');
 
     // Resolve request with data

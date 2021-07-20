@@ -25,6 +25,7 @@ describe('EventListComponent', () => {
 
   it('should have no attendees on load', () => {
     const liElements = container.querySelectorAll('li');
+
     expect(liElements).toHaveSize(0);
   });
 
@@ -40,6 +41,7 @@ describe('EventListComponent', () => {
     fixture.detectChanges();
 
     const liElements = container.querySelectorAll('li');
+
     expect(liElements).toHaveSize(1);
   });
 });

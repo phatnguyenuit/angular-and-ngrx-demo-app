@@ -6,6 +6,6 @@ const routes: Routes = [{ path: '', component: EventComponent }];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class EventRoutingModule { }
+export class EventRoutingModule {}
