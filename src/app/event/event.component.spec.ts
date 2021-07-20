@@ -19,7 +19,12 @@ describe('EventComponent', () => {
       imports: [ReactiveFormsModule],
       providers: [
         provideMockStore({
-          initialState: {},
+          initialState: {
+            event: {
+              spinner: {},
+              attendees: {},
+            },
+          },
         }),
         {
           provide: HttpClient,

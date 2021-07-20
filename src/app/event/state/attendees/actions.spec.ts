@@ -1,9 +1,10 @@
 import * as actions from './actions';
+import { AttendeeActions, loadAttendees } from './actions';
 
 describe('attendees.actions', () => {
   it('should return action to load attendees', () => {
     expect(actions.loadAttendees()).toEqual({
-      type: '[ATTENDEES]loadAttendees',
+      type: AttendeeActions.loadAttendees,
     });
   });
 
@@ -13,14 +14,14 @@ describe('attendees.actions', () => {
         attendees: [],
       })
     ).toEqual({
-      type: '[ATTENDEES]loadAttendeesSuccess',
+      type: AttendeeActions.loadAttendeesSuccess,
       attendees: [],
     });
   });
 
   it('should return action to load attendees failed', () => {
     expect(actions.loadAttendeesFail({ message: 'error message' })).toEqual({
-      type: '[ATTENDEES]loadAttendeesFail',
+      type: AttendeeActions.loadAttendeesFail,
       message: 'error message',
     });
   });

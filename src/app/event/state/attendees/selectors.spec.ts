@@ -2,7 +2,7 @@ import { selectAttendeesState, selectAttendees } from './selectors';
 import { AttendeesState } from '../types';
 import { Attendee } from 'app/event/models';
 
-fdescribe('attendees.selectors', () => {
+describe('attendees.selectors', () => {
   describe('selectAttendeesState', () => {
     const testCases: {
       initialState?: AttendeesState;
