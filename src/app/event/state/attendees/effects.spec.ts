@@ -5,14 +5,17 @@ import {
 import { TestBed } from '@angular/core/testing';
 import { provideMockActions } from '@ngrx/effects/testing';
 import { Action } from '@ngrx/store';
+import { TypedAction } from '@ngrx/store/src/models';
 import { Observable, of } from 'rxjs';
 
 import { Attendee } from '../../models/attendee';
 import { EventService } from '../../services/event.service';
 import {
-  loadAttendees,
   AttendeeActions,
+  loadAttendees,
   loadAttendeesSuccess,
+  addAttendee,
+  addAttendeeSuccess,
 } from './actions';
 import { AttendeesEffects } from './effects';
 
@@ -21,8 +24,8 @@ describe('attendees.effects', () => {
   let effects: AttendeesEffects;
   let actions$: Observable<Action>;
 
-  beforeEach(() => {
-    actions$ = of(loadAttendees());
+  const setupTest = <TAction extends TypedAction<string>>(action: TAction) => {
+    actions$ = of(action);
     TestBed.configureTestingModule({
       imports: [HttpClientTestingModule],
       providers: [
@@ -34,51 +37,103 @@ describe('attendees.effects', () => {
 
     effects = TestBed.inject(AttendeesEffects);
     httpMock = TestBed.inject(HttpTestingController);
-  });
+  };
 
   afterEach(() => {
     httpMock.verify();
   });
 
-  it('should call getAttendees effect and dispatch `loadAttendeesSuccess`', (done) => {
-    const attendees: Attendee[] = [
-      {
-        id: 1,
-        name: 'Fast',
-        attending: true,
-        guests: 0,
-      },
-    ];
-
-    effects.getAttendees$.subscribe((action) => {
-      expect(action).toEqual(
-        loadAttendeesSuccess({
-          attendees,
-        })
-      );
-      done();
+  describe('getAttendees$', () => {
+    beforeEach(() => {
+      setupTest(loadAttendees());
     });
 
-    const req = httpMock.expectOne('/api/attendees');
+    it('should call and dispatch action `loadAttendeesSuccess`', (done) => {
+      const attendees: Attendee[] = [
+        {
+          id: 1,
+          name: 'Fast',
+          attending: true,
+          guests: 0,
+        },
+      ];
 
-    expect(req.request.method).toBe('GET');
+      effects.getAttendees$.subscribe((action) => {
+        expect(action).toEqual(
+          loadAttendeesSuccess({
+            attendees,
+          })
+        );
+        done();
+      });
 
-    req.flush(attendees);
+      const req = httpMock.expectOne('/api/attendees');
+
+      expect(req.request.method).toBe('GET');
+
+      req.flush(attendees);
+    });
+
+    it('should call and dispatch action `loadAttendeesFail`', (done) => {
+      effects.getAttendees$.subscribe((action) => {
+        expect(action.type).toEqual(AttendeeActions.loadAttendeesFail);
+        done();
+      });
+
+      const req = httpMock.expectOne('/api/attendees');
+
+      expect(req.request.method).toBe('GET');
+
+      req.error(new ErrorEvent('error event'), {
+        status: 500,
+        statusText: 'Internal error',
+      });
+    });
   });
 
-  it('should call getAttendees effect and dispatch `loadAttendeesFail`', (done) => {
-    effects.getAttendees$.subscribe((action) => {
-      expect(action.type).toEqual(AttendeeActions.loadAttendeesFail);
-      done();
+  describe('addAttendee$', () => {
+    const sampleAttendee: Attendee = {
+      id: 1,
+      name: 'Fast',
+      attending: true,
+      guests: 0,
+    };
+
+    beforeEach(() => {
+      setupTest(addAttendee({ payload: sampleAttendee }));
     });
 
-    const req = httpMock.expectOne('/api/attendees');
+    it('should call addAttendee$ effect and dispatch action `addAttendeeSuccess`', (done) => {
+      effects.addAttendee$.subscribe((action) => {
+        expect(action).toEqual(
+          addAttendeeSuccess({
+            attendee: sampleAttendee,
+          })
+        );
+        done();
+      });
 
-    expect(req.request.method).toBe('GET');
+      const req = httpMock.expectOne('/api/attendees');
 
-    req.error(new ErrorEvent('error event'), {
-      status: 500,
-      statusText: 'Internal error',
+      expect(req.request.method).toBe('POST');
+
+      req.flush(sampleAttendee);
+    });
+
+    it('should call addAttendee$ effect and dispatch action `addAttendeeFail`', (done) => {
+      effects.addAttendee$.subscribe((action) => {
+        expect(action.type).toEqual(AttendeeActions.addAttendeeFail);
+        done();
+      });
+
+      const req = httpMock.expectOne('/api/attendees');
+
+      expect(req.request.method).toBe('POST');
+
+      req.error(new ErrorEvent('error event'), {
+        status: 500,
+        statusText: 'Internal error',
+      });
     });
   });
 });

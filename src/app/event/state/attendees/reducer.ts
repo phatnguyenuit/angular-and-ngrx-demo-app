@@ -27,11 +27,17 @@ export const reducer = createReducer(
   on(actions.loadAttendeesFail, (state, { errorMessage }) =>
     adapter.removeAll({ ...state, errorMessage, loading: false })
   ),
+  on(actions.addAttendee, (state) => ({
+    ...state,
+    loading: true,
+    message: undefined,
+  })),
   on(actions.addAttendeeSuccess, (state, { attendee }) =>
-    adapter.addOne(attendee, state)
+    adapter.addOne(attendee, { ...state, loading: false })
   ),
   on(actions.addAttendeeFail, (state, { errorMessage }) => ({
     ...state,
     errorMessage,
+    loading: false,
   }))
 );

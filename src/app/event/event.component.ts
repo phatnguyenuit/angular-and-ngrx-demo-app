@@ -5,9 +5,8 @@ import { Observable } from 'rxjs';
 import { RootState } from '../state/root.reducer';
 import { Attendee } from './models';
 import { EventService } from './services/event.service';
-import { selectIsSpinning } from './state/spinner/selectors';
 import { loadAttendees, addAttendee } from './state/attendees/actions';
-import { selectAttendees } from './state/attendees/selectors';
+import { selectAttendees, selectIsLoading } from './state/attendees/selectors';
 
 @Component({
   selector: 'app-event',
@@ -22,7 +21,7 @@ export class EventComponent implements OnInit {
     private eventService: EventService,
     private store: Store<RootState>
   ) {
-    this.isLoading$ = this.store.select(selectIsSpinning);
+    this.isLoading$ = this.store.select(selectIsLoading);
     this.attendees$ = this.store.select(selectAttendees);
   }
 

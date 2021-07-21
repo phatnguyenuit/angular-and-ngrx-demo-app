@@ -12,3 +12,8 @@ export const selectAttendeesState = createSelector(
 );
 
 export const selectAttendees = createSelector(selectAttendeesState, selectAll);
+
+export const selectIsLoading = createSelector(
+  selectAttendeesState,
+  (state) => state.loading
+);
