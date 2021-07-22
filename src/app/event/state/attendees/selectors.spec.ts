@@ -1,6 +1,7 @@
 import { Attendee } from '../../models';
 import { AttendeesState } from '../types';
 import { initialState } from './reducer';
+import { selectFilteredAttendees } from './selectors';
 import {
   selectAttendeesState,
   selectAttendees,
@@ -147,6 +148,43 @@ describe('attendees.selectors', () => {
         const result = selectIsLoading.projector(testCase.initialState);
 
         expect(result).toEqual(testCase.expected);
+      });
+    });
+  });
+
+  describe('selectFilteredAttendees ', () => {
+    const attendees: Attendee[] = [
+      {
+        id: 1,
+        name: 'Test Attendee',
+        isAttending: true,
+        guests: 0,
+      },
+      {
+        id: 2,
+        name: 'Test Attendee 2',
+        isAttending: true,
+        guests: 1,
+      },
+    ];
+    const testCases = {
+      '': 2,
+      all: 2,
+      withGuests: 1,
+      withoutGuests: 1,
+      wrongFilterBy: 0,
+    };
+
+    Object.entries(testCases).forEach(([filterBy, expectedSize]) => {
+      it(`should return filtered attendees correctly - case filterBy=${JSON.stringify(
+        filterBy
+      )}`, () => {
+        const filteredAttendees = selectFilteredAttendees.projector(
+          attendees,
+          filterBy
+        );
+
+        expect(filteredAttendees).toHaveSize(expectedSize);
       });
     });
   });

@@ -1,3 +1,9 @@
 {{ title }}
 
-<input type="text" #input [value]="title" (keyup)="updateTitle(input.value)" />
+<input
+  #input
+  type="text"
+  data-testid="title-input"
+  [value]="title"
+  (change)="updateTitle(input.value)"
+/>

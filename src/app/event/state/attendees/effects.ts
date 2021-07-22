@@ -2,10 +2,8 @@ import { Injectable } from '@angular/core';
 import { Actions, createEffect } from '@ngrx/effects';
 import { ofType } from '@ngrx/effects';
 import { ROUTER_NAVIGATION, RouterNavigationAction } from '@ngrx/router-store';
-import { Store } from '@ngrx/store';
 import { of } from 'rxjs';
 import { switchMap, map, catchError, filter } from 'rxjs/operators';
-import { RootState } from 'app/state/root.reducer';
 
 import { Attendee } from '../../models';
 import { EventService } from '../../services/event.service';
@@ -21,11 +19,7 @@ import {
 
 @Injectable()
 export class AttendeesEffects {
-  constructor(
-    private actions$: Actions,
-    private eventService: EventService,
-    private store: Store<RootState>
-  ) {}
+  constructor(private actions$: Actions, private eventService: EventService) {}
 
   getAttendees$ = createEffect(() =>
     this.actions$.pipe(
@@ -63,7 +57,7 @@ export class AttendeesEffects {
         filterBy: payload.routerState.root.queryParams['filterBy'],
       })),
       filter(({ url }) => url.startsWith('/event')),
-      map(({ filterBy = 'all' }) =>
+      map(({ filterBy }) =>
         filterByAction({
           filterBy,
         })

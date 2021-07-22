@@ -3,11 +3,14 @@ import {
   HttpTestingController,
 } from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
+import { ActivatedRouteSnapshot, RoutesRecognized } from '@angular/router';
 import { provideMockActions } from '@ngrx/effects/testing';
+import { routerNavigationAction } from '@ngrx/router-store';
 import { Action } from '@ngrx/store';
 import { TypedAction } from '@ngrx/store/src/models';
 import { provideMockStore } from '@ngrx/store/testing';
 import { Observable, of } from 'rxjs';
+import { isEmpty } from 'rxjs/operators';
 
 import { Attendee } from '../../models/attendee';
 import { EventService } from '../../services/event.service';
@@ -18,6 +21,7 @@ import {
   loadAttendeesSuccess,
   addAttendee,
   addAttendeeSuccess,
+  filterBy,
 } from './actions';
 import { AttendeesEffects } from './effects';
 
@@ -143,6 +147,55 @@ describe('attendees.effects', () => {
       req.error(new ErrorEvent('error event'), {
         status: 500,
         statusText: 'Internal error',
+      });
+    });
+  });
+
+  describe('loadFilteredAttendees$', () => {
+    const configureTest = ({
+      url,
+      filterBy,
+    }: {
+      url: string;
+      filterBy?: string;
+    }) => {
+      setupTest(
+        routerNavigationAction({
+          payload: {
+            routerState: {
+              url,
+              root: {
+                queryParams: {
+                  filterBy,
+                },
+              } as unknown as ActivatedRouteSnapshot,
+            },
+            event: {} as unknown as RoutesRecognized,
+          },
+        })
+      );
+    };
+
+    const possibleFilterByValues = ['', 'all', 'withGuests', 'withoutGuests'];
+
+    possibleFilterByValues.forEach((filterByValue) => {
+      it(`should call filterBy action if url starts with "/event" and filterBy="${filterByValue}"`, (done) => {
+        configureTest({ url: '/event', filterBy: filterByValue });
+        effects.loadFilteredAttendees$.subscribe((action) => {
+          expect(action).toEqual(
+            filterBy({
+              filterBy: filterByValue,
+            })
+          );
+          done();
+        });
+      });
+    });
+    it(`should not call filterBy action if url starts with "/another-one"`, (done) => {
+      configureTest({ url: '/another-one' });
+      effects.loadFilteredAttendees$.pipe(isEmpty()).subscribe((result) => {
+        expect(result).toBe(true);
+        done();
       });
     });
   });

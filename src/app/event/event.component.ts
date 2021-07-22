@@ -30,7 +30,7 @@ export class EventComponent implements OnInit {
     this.isLoading$ = this.store.select(selectIsLoading);
     this.attendees$ = this.store.select(selectFilteredAttendees);
     this.activatedRoute.queryParams.subscribe((params) => {
-      this.filterBy = params['filterBy'] ?? 'all';
+      this.filterBy = params['filterBy'];
     });
   }
 

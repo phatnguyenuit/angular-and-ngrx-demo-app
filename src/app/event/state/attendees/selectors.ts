@@ -27,11 +27,20 @@ export const selectFilteredAttendees = createSelector(
   selectAttendees,
   selectFilterBy,
   (attendees, filterBy) =>
-    attendees.filter((attendee) =>
-      filterBy === 'all'
-        ? true
-        : filterBy === 'withGuests'
-        ? attendee.guests >= 1
-        : attendee.guests === 0
-    )
+    attendees.filter((attendee) => {
+      switch (filterBy) {
+        case '':
+        case 'all': {
+          return true;
+        }
+        case 'withGuests': {
+          return attendee.guests > 0;
+        }
+        case 'withoutGuests': {
+          return attendee.guests === 0;
+        }
+        default:
+          return false;
+      }
+    })
 );

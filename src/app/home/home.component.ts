@@ -11,7 +11,6 @@ export class HomeComponent {
   constructor() {}
 
   updateTitle(value: string) {
-    console.log(`updateTitle: ${value}`);
     this.title = value;
   }
 }

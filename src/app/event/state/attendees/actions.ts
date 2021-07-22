@@ -36,5 +36,5 @@ export const addAttendeeFail = createAction(
 
 export const filterBy = createAction(
   AttendeeActions.filterBy,
-  props<{ filterBy: string }>()
+  props<{ filterBy?: string }>()
 );
