@@ -34,7 +34,7 @@ jobs:
         run: yarn install --no-progress --non-interactive
 
       - name: Run test coverage
-        run: yarn test:coverage --no-progress
+        run: yarn test:coverage --no-progress --no-watch
 
       - name: Upload coverage to Codecov
         uses: codecov/codecov-action@v1
