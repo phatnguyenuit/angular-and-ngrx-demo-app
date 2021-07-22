@@ -1,6 +1,7 @@
 {
   "name": "angular-and-ngrx-demo-app",
-  "version": "0.0.0",
+  "version": "1.0.0",
+  "license": "MIT",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
@@ -9,6 +10,8 @@
     "test": "ng test",
     "test:coverage": "ng test --code-coverage",
     "lint": "ng lint",
+    "predeploy": "yarn build",
+    "deploy": "gh-pages -d dist/angular-and-ngrx-demo-app",
     "build:dev": "ng build --configuration development",
     "type-check": "tsc -p tsconfig.json --noEmit"
   },
@@ -52,6 +55,7 @@
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-jasmine": "^4.1.2",
     "eslint-plugin-prettier": "^3.4.0",
+    "gh-pages": "^3.2.3",
     "husky": "4.3.8",
     "jasmine-core": "~3.8.0",
     "karma": "~6.3.0",

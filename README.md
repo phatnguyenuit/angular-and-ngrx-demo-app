@@ -1,6 +1,21 @@
-# Angular And NgRx Demo App
+# [Angular And NgRx Demo App](https://phatnguyenuit.github.io/angular-and-ngrx-demo-app)
+
+![CI/CD](https://github.com/phatnguyenuit/angular-and-ngrx-demo-app/workflows/CI/badge.svg)
+[![codecov](https://codecov.io/gh/phatnguyenuit/angular-and-ngrx-demo-app/branch/master/graph/badge.svg?token=P6ukKMelkS)](https://codecov.io/gh/phatnguyenuit/angular-and-ngrx-demo-app)
+![License](https://img.shields.io/github/license/phatnguyenuit/angular-and-ngrx-demo-app)
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 12.1.2.
+
+## Table of Contents
+
+- [Angular And NgRx Demo App](#angular-and-ngrx-demo-app)
+  - [Table of Contents](#table-of-contents)
+  - [Development server](#development-server)
+  - [Code scaffolding](#code-scaffolding)
+  - [Build](#build)
+  - [Running unit tests](#running-unit-tests)
+  - [Running end-to-end tests](#running-end-to-end-tests)
+  - [Further help](#further-help)
 
 ## Development server
 
