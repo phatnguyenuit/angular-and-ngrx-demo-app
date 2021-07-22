@@ -31,7 +31,11 @@ module.exports = function (config) {
         "./coverage/angular-and-ngrx-demo-app"
       ),
       subdir: ".",
-      reporters: [{ type: "html" }, { type: "text-summary" }],
+      reporters: [
+        { type: "html" },
+        { type: "lcov", subdir: "report-lcov" },
+        { type: "text-summary" },
+      ],
     },
     reporters: ["mocha", "kjhtml"],
     port: 9876,
