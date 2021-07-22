@@ -7,10 +7,9 @@ describe('HomeComponent', () => {
   let fixture: ComponentFixture<HomeComponent>;
   let container: HTMLDivElement;
 
-  const changeValue = async (input: HTMLInputElement, value: string) => {
+  const typeValue = async (input: HTMLInputElement, value: string) => {
     input.value = value;
-    input.dispatchEvent(new Event('change'));
-    input.dispatchEvent(new Event('input'));
+    input.dispatchEvent(new Event('keyup'));
     await fixture.whenStable();
     await fixture.detectChanges();
   };
@@ -44,11 +43,22 @@ describe('HomeComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should update title', () => {
-    const input: HTMLInputElement = getByTestId('title-input');
+  it('should render with default title', () => {
+    const titleElement: HTMLSpanElement = getByTestId('title');
+    const titleInput: HTMLInputElement = getByTestId('title-input');
 
-    changeValue(input, 'Changed title');
+    expect(titleElement.textContent).toEqual(JSON.stringify('Home'));
+    expect(titleInput.value).toEqual('Home');
+  });
+
+  it('should update title', async () => {
+    const titleElement: HTMLSpanElement = getByTestId('title');
+    const titleInput: HTMLInputElement = getByTestId('title-input');
+
+    await typeValue(titleInput, 'Changed title');
 
     expect(component.title).toEqual('Changed title');
+    expect(titleInput.value).toEqual('Changed title');
+    expect(titleElement.textContent).toEqual(JSON.stringify('Changed title'));
   });
 });

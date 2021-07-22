@@ -1,9 +1,14 @@
-{{ title }}
+<h4>
+  <label for="title-input"
+    >Title: <span data-testid="title">{{ title | json }}</span></label
+  >
+</h4>
 
 <input
   #input
-  type="text"
   data-testid="title-input"
+  type="text"
+  id="title-input"
   [value]="title"
-  (change)="updateTitle(input.value)"
+  (keyup)="updateTitle(input.value)"
 />
