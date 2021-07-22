@@ -15,21 +15,29 @@ export class AddAttendeeComponent {
   constructor() {
     this.addAttendeeForm = new FormGroup({
       name: new FormControl('', [Validators.required]),
+      guests: new FormControl(0, [Validators.required]),
+      isAttending: new FormControl(true),
     });
   }
 
   submit() {
     if (this.addAttendeeForm.invalid) return;
 
-    const attendee = {
-      name: this.addAttendeeForm.value.name,
-      attending: true,
-      guests: 0,
+    const { name, guests, isAttending } = this.addAttendeeForm.value;
+
+    const attendee: Attendee = {
+      name,
+      guests,
+      isAttending,
     };
     // Emit new attendee
     this.addAttendeeEvent.emit(attendee);
 
     // Reset form
-    this.addAttendeeForm.reset('');
+    this.addAttendeeForm.reset({
+      name: '',
+      guests: 0,
+      isAttending: true,
+    });
   }
 }

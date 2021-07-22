@@ -1,5 +1,7 @@
-<ul>
-  <li *ngFor="let attendee of attendees">
-    {{ attendee.name }}
-  </li>
-</ul>
+<div class="attendees">
+  <app-attendee
+    *ngFor="let attendee of attendees"
+    [attendee]="attendee"
+  ></app-attendee>
+  <p *ngIf="!attendees || !attendees.length">No matched attendees found.</p>
+</div>

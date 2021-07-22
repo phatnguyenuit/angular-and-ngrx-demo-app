@@ -6,10 +6,12 @@ import { TestBed } from '@angular/core/testing';
 import { provideMockActions } from '@ngrx/effects/testing';
 import { Action } from '@ngrx/store';
 import { TypedAction } from '@ngrx/store/src/models';
+import { provideMockStore } from '@ngrx/store/testing';
 import { Observable, of } from 'rxjs';
 
 import { Attendee } from '../../models/attendee';
 import { EventService } from '../../services/event.service';
+import { initialState } from '../../state/attendees/reducer';
 import {
   AttendeeActions,
   loadAttendees,
@@ -30,6 +32,14 @@ describe('attendees.effects', () => {
       imports: [HttpClientTestingModule],
       providers: [
         provideMockActions(() => actions$),
+        provideMockStore({
+          initialState: {
+            event: {
+              spinner: {},
+              attendees: initialState,
+            },
+          },
+        }),
         AttendeesEffects,
         EventService,
       ],
@@ -53,7 +63,7 @@ describe('attendees.effects', () => {
         {
           id: 1,
           name: 'Fast',
-          attending: true,
+          isAttending: true,
           guests: 0,
         },
       ];
@@ -95,7 +105,7 @@ describe('attendees.effects', () => {
     const sampleAttendee: Attendee = {
       id: 1,
       name: 'Fast',
-      attending: true,
+      isAttending: true,
       guests: 0,
     };
 

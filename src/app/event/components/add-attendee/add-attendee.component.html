@@ -1,9 +1,19 @@
 <form [formGroup]="addAttendeeForm" (ngSubmit)="submit()">
-  <input type="text" formControlName="name" />
+  <div class="form-row">
+    <label for="name">Name</label>
+    <input type="text" formControlName="name" id="name" />
+  </div>
+  <div class="form-row">
+    <label for="guests">Guests</label>
+    <input type="text" formControlName="guests" id="guests" />
+  </div>
+  <input type="checkbox" formControlName="isAttending" id="isAttending" />
+  <label for="isAttending">Attending?</label>
   <button
     [disabled]="addAttendeeForm.invalid"
     type="submit"
     data-testid="submit"
+    class="submit-btn"
   >
     submit
   </button>

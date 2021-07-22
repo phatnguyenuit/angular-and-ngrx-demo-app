@@ -10,6 +10,7 @@ export const adapter: EntityAdapter<Attendee> = createEntityAdapter<Attendee>();
 export const initialState: AttendeesState = adapter.getInitialState({
   loading: false,
   errorMessage: undefined,
+  filterBy: 'all',
 });
 
 export const reducer = createReducer(
@@ -39,5 +40,6 @@ export const reducer = createReducer(
     ...state,
     errorMessage,
     loading: false,
-  }))
+  })),
+  on(actions.filterBy, (state, { filterBy }) => ({ ...state, filterBy }))
 );

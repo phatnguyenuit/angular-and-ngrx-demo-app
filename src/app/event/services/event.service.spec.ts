@@ -33,7 +33,7 @@ describe('EventService', () => {
       {
         id: 1,
         name: 'Fast',
-        attending: true,
+        isAttending: true,
         guests: 0,
       },
     ];
@@ -53,7 +53,7 @@ describe('EventService', () => {
     const attendee: Attendee = {
       id: 1,
       name: 'Fast',
-      attending: true,
+      isAttending: true,
       guests: 0,
     };
 

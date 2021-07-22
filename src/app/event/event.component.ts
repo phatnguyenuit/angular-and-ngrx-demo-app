@@ -1,12 +1,15 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 
 import { RootState } from '../state/root.reducer';
 import { Attendee } from './models';
-import { EventService } from './services/event.service';
 import { loadAttendees, addAttendee } from './state/attendees/actions';
-import { selectAttendees, selectIsLoading } from './state/attendees/selectors';
+import {
+  selectIsLoading,
+  selectFilteredAttendees,
+} from './state/attendees/selectors';
 
 @Component({
   selector: 'app-event',
@@ -17,12 +20,18 @@ export class EventComponent implements OnInit {
   attendees$!: Observable<Attendee[]>;
   isLoading$: Observable<boolean>;
 
+  filterBy: string = 'all';
+
   constructor(
-    private eventService: EventService,
-    private store: Store<RootState>
+    private store: Store<RootState>,
+    private router: Router,
+    private activatedRoute: ActivatedRoute
   ) {
     this.isLoading$ = this.store.select(selectIsLoading);
-    this.attendees$ = this.store.select(selectAttendees);
+    this.attendees$ = this.store.select(selectFilteredAttendees);
+    this.activatedRoute.queryParams.subscribe((params) => {
+      this.filterBy = params['filterBy'] ?? 'all';
+    });
   }
 
   ngOnInit() {
@@ -35,5 +44,9 @@ export class EventComponent implements OnInit {
 
   addAttendee(attendee: Attendee) {
     this.store.dispatch(addAttendee({ payload: attendee }));
+  }
+
+  onChange(filterBy: string) {
+    this.router.navigateByUrl(`/event?filterBy=${filterBy}`);
   }
 }

@@ -17,3 +17,21 @@ export const selectIsLoading = createSelector(
   selectAttendeesState,
   (state) => state.loading
 );
+
+export const selectFilterBy = createSelector(
+  selectAttendeesState,
+  (state) => state.filterBy
+);
+
+export const selectFilteredAttendees = createSelector(
+  selectAttendees,
+  selectFilterBy,
+  (attendees, filterBy) =>
+    attendees.filter((attendee) =>
+      filterBy === 'all'
+        ? true
+        : filterBy === 'withGuests'
+        ? attendee.guests >= 1
+        : attendee.guests === 0
+    )
+);

@@ -8,6 +8,8 @@ import { initialState } from './state/attendees/reducer';
 import { EventComponent } from './event.component';
 import { AddAttendeeComponent } from './components/add-attendee/add-attendee.component';
 import { EventListComponent } from './components/event-list/event-list.component';
+import { AttendeeComponent } from './components/attendee/attendee.component';
+import { RouterTestingModule } from '@angular/router/testing';
 
 describe('EventComponent', () => {
   let component: EventComponent;
@@ -15,8 +17,13 @@ describe('EventComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [EventComponent, AddAttendeeComponent, EventListComponent],
-      imports: [ReactiveFormsModule],
+      declarations: [
+        EventComponent,
+        AddAttendeeComponent,
+        EventListComponent,
+        AttendeeComponent,
+      ],
+      imports: [ReactiveFormsModule, RouterTestingModule],
       providers: [
         provideMockStore({
           initialState: {

@@ -13,9 +13,15 @@ import { EventService } from './services/event.service';
 import { reducersMap, effects } from './state';
 import { AddAttendeeComponent } from './components/add-attendee/add-attendee.component';
 import { EventListComponent } from './components/event-list/event-list.component';
+import { AttendeeComponent } from './components/attendee/attendee.component';
 
 @NgModule({
-  declarations: [EventComponent, AddAttendeeComponent, EventListComponent],
+  declarations: [
+    EventComponent,
+    AddAttendeeComponent,
+    EventListComponent,
+    AttendeeComponent,
+  ],
   imports: [
     CommonModule,
     EventRoutingModule,

@@ -30,12 +30,14 @@ describe('attendees.selectors', () => {
       {
         initialState: {
           loading: false,
+          filterBy: '',
           ids: [],
           entities: {},
           errorMessage: 'Failed to load',
         },
         expected: {
           loading: false,
+          filterBy: '',
           ids: [],
           entities: {},
           errorMessage: 'Failed to load',
@@ -44,24 +46,26 @@ describe('attendees.selectors', () => {
       {
         initialState: {
           loading: false,
+          filterBy: '',
           ids: [1],
           entities: {
             1: {
               id: 1,
               name: 'Test Attendee',
-              attending: true,
+              isAttending: true,
               guests: 0,
             },
           },
         },
         expected: {
           loading: false,
+          filterBy: '',
           ids: [1],
           entities: {
             1: {
               id: 1,
               name: 'Test Attendee',
-              attending: true,
+              isAttending: true,
               guests: 0,
             },
           },
@@ -92,12 +96,13 @@ describe('attendees.selectors', () => {
         {
           initialState: {
             loading: false,
+            filterBy: '',
             ids: [1],
             entities: {
               1: {
                 id: 1,
                 name: 'Test Attendee',
-                attending: true,
+                isAttending: true,
                 guests: 0,
               },
             },
@@ -106,7 +111,7 @@ describe('attendees.selectors', () => {
             {
               id: 1,
               name: 'Test Attendee',
-              attending: true,
+              isAttending: true,
               guests: 0,
             },
           ],

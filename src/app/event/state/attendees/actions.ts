@@ -8,6 +8,7 @@ export enum AttendeeActions {
   addAttendee = '[ATTENDEES] ADD',
   addAttendeeSuccess = '[ATTENDEES] ADD SUCCESS',
   addAttendeeFail = '[ATTENDEES] ADD FAILED',
+  filterBy = '[ATTENDEES] FILTER BY',
 }
 
 export const loadAttendees = createAction(AttendeeActions.loadAttendees);
@@ -31,4 +32,9 @@ export const addAttendeeSuccess = createAction(
 export const addAttendeeFail = createAction(
   AttendeeActions.addAttendeeFail,
   props<{ errorMessage: string }>()
+);
+
+export const filterBy = createAction(
+  AttendeeActions.filterBy,
+  props<{ filterBy: string }>()
 );

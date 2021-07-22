@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { AttendeeComponent } from '../attendee/attendee.component';
 import { EventListComponent } from './event-list.component';
 
 describe('EventListComponent', () => {
@@ -8,7 +9,7 @@ describe('EventListComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [EventListComponent],
+      declarations: [EventListComponent, AttendeeComponent],
     }).compileComponents();
   });
 
@@ -24,24 +25,23 @@ describe('EventListComponent', () => {
   });
 
   it('should have no attendees on load', () => {
-    const liElements = container.querySelectorAll('li');
+    const cards = container.querySelectorAll('.card');
 
-    expect(liElements).toHaveSize(0);
+    expect(cards).toHaveSize(0);
   });
 
   it('should have one attendees on load', () => {
     component.attendees = [
       {
         name: 'Fast',
-        attending: true,
+        isAttending: true,
         guests: 0,
       },
     ];
 
     fixture.detectChanges();
+    const cards = container.querySelectorAll('.card');
 
-    const liElements = container.querySelectorAll('li');
-
-    expect(liElements).toHaveSize(1);
+    expect(cards).toHaveSize(1);
   });
 });
