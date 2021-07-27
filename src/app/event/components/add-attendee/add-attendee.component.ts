@@ -21,14 +21,12 @@ export class AddAttendeeComponent {
   }
 
   submit() {
-    if (this.addAttendeeForm.invalid) return;
-
     const { name, guests, isAttending } = this.addAttendeeForm.value;
 
     const attendee: Attendee = {
       name,
-      guests,
       isAttending,
+      guests: Number(guests),
     };
     // Emit new attendee
     this.addAttendeeEvent.emit(attendee);

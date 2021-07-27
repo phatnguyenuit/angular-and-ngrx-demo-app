@@ -10,12 +10,31 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 
 - [Angular And NgRx Demo App](#angular-and-ngrx-demo-app)
   - [Table of Contents](#table-of-contents)
+  - [Features](#features)
   - [Development server](#development-server)
   - [Code scaffolding](#code-scaffolding)
   - [Build](#build)
   - [Running unit tests](#running-unit-tests)
   - [Running end-to-end tests](#running-end-to-end-tests)
   - [Further help](#further-help)
+
+## Features
+
+- GitHub Actions
+- @ngrx/store
+- @ngrx/effects
+- @ngrx/entity
+- @ngrx/router-store
+- @ngrx/store-devtools
+- @commitlint
+- commitizen
+- [Configure ESlint](https://github.com/angular-eslint/angular-eslint)
+- husky
+- gh-pages
+- [Configure Mocha reporter](https://www.npmjs.com/package/karma-mocha-reporter)
+- @testing-library/angular
+- @testing-library/user-event
+- @testing-library/jasmine-dom
 
 ## Development server
 

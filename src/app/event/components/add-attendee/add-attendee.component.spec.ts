@@ -35,24 +35,15 @@ describe('AddAttendeeComponent', () => {
     expect(component.addAttendeeForm.valid).toEqual(true);
   });
 
-  describe('should not submit in case having invalid form', () => {
-    it('from UI', () => {
-      const addAttendeeEventSpy = spyOn(component, 'addAttendeeEvent');
-      const button: HTMLButtonElement = fixture.nativeElement.querySelector(
-        `button[data-testid='submit']`
-      );
+  it('should not submit in case having invalid form', () => {
+    const addAttendeeEventSpy = spyOn(component, 'addAttendeeEvent');
+    const button: HTMLButtonElement = fixture.nativeElement.querySelector(
+      `button[data-testid='submit']`
+    );
 
-      button.click();
+    button.click();
 
-      expect(addAttendeeEventSpy).not.toHaveBeenCalled();
-    });
-
-    it('from component', () => {
-      const addAttendeeEventSpy = spyOn(component, 'addAttendeeEvent');
-      component.submit();
-
-      expect(addAttendeeEventSpy).not.toHaveBeenCalled();
-    });
+    expect(addAttendeeEventSpy).not.toHaveBeenCalled();
   });
 
   it('should emit an attendee', () => {
