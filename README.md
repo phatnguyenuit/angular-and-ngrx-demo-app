@@ -4,6 +4,8 @@
 [![codecov](https://codecov.io/gh/phatnguyenuit/angular-and-ngrx-demo-app/branch/master/graph/badge.svg?token=P6ukKMelkS)](https://codecov.io/gh/phatnguyenuit/angular-and-ngrx-demo-app)
 ![License](https://img.shields.io/github/license/phatnguyenuit/angular-and-ngrx-demo-app)
 
+![angular-and-ngrx-demo-app](https://socialify.git.ci/phatnguyenuit/angular-and-ngrx-demo-app/image?description=1&font=Inter&forks=1&issues=1&language=1&owner=1&pattern=Plus&pulls=1&stargazers=1&theme=Light)
+
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 12.1.2.
 
 ## Table of Contents
